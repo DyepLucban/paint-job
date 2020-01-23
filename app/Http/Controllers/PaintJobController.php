@@ -91,7 +91,7 @@ class PaintJobController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'plate_no' => 'required|regex:/[A-Z]{1,3} [0-9]{1,3}/',
+            'plate_no' => 'required|regex:/^[A-Z]{1,3} [0-9]{1,3}$/',
             'curr' => 'required',
             'target' => 'required|different:curr'
         ]);
