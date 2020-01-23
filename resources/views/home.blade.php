@@ -3,7 +3,7 @@
 @section('content')
 	<div class="row mt-5">
 		<div class="jumbotron col px-md-5">
-			<h1 class="display-4 text-center"><!-- Juan's Auto Paint -->Banner</h1>
+			<h1 class="display-4 text-center">Juan's Auto Paint</h1>
 		</div>
 	</div>
 
