@@ -21,10 +21,10 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Run this codes first
+## Instructions
 
-1. create a database
-2. create .env file, copy and paste the codes inside .env.example, and change DB_DATABASE to your database
-3. composer install
-4. php artisan migrate
-5. php artisan key:generate
+- create a database
+- create .env file, copy and paste the codes inside .env.example, and change DB_DATABASE to your database
+- composer install
+- php artisan migrate
+- php artisan key:generate
