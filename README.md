@@ -25,6 +25,9 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 - create a database
 - create .env file, copy and paste the codes inside .env.example, and change DB_DATABASE to your database
+
+In your command line, run this codes
+
 - composer install
 - php artisan migrate
 - php artisan key:generate
