@@ -120,7 +120,7 @@
           			target: jQuery('#target').val()
           		},
           		success: function(res) {
-          			window.location.href = "http://localhost/paint-jobs-api/public/api/cars";
+          			window.location.href = "http://localhost/paint-job/public/api/cars";
           		},
           		error: function(errors) {
           			console.log(errors)
