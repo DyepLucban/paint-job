@@ -130,21 +130,18 @@
 @section('javascript')
 	<script type="text/javascript">
      	jQuery(document).ready(function(){
-     		// refresh();
+     		refresh();
 		});
 
-		// function refresh() {
-	 // 		setInterval(function () {
-	 //      		jQuery.ajax({
-		// 			url: "{{ url('/api/count') }}",
-	 //          		method: 'get',
-	 //          		success: function(res) {
-	 //          			console.log('refreshed!');   
-  //         				location.reload();
-	 //          		},
-	 //      		}); 
-	 // 		}, 5000);
-		// }
+		function refresh() {
+	 		setInterval(function () {
+				updateQueued();
+				$( "#total" ).load(window.location.href + " #total" );
+				$( "#queue" ).load(window.location.href + " #queue" );
+				$( "#in_prog" ).load(window.location.href + " #in_prog" );
+				console.log('refreshed');
+	 		}, 5000);
+		}
 
 		function updateQueued() {
 			jQuery.get("{{ url('/api/count') }}", function(res) {
