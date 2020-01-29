@@ -1,16 +1,19 @@
 @extends('layouts.master')
 
 @section('content')
-	<div class="row mt-5">
-		<div class="jumbotron col px-md-5">
+	<br>
+	<!--Place fixed top nav bar under jumbotron-->
+	<header class="masthead">
+		<div class="jumbotron feature">
 			<h1 class="display-4 text-center">Juan's Auto Paint</h1>
 		</div>
-	</div>
-
-	<div class="row">
-		<ul class="nav" id="myTab">
+	</header>
+  
+	<!--Navigation-->
+	<div id="nav">
+		<ul class="nav" style="background: #ea6a5b;" id="myTab" >
 			<li class="nav-item">
-				<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">NEW PAINT JOBS</a>
+				<a class="nav-link active" href="{{ url('/') }}">NEW PAINT JOBS</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" id="profile-tab" href="{{ url('/api/cars') }}" role="tab">PAINT JOBS</a>
@@ -40,20 +43,20 @@
 		</div>		
 	</div>
 	<br>
-	<div class="col-md-7">
+	<div class="col-md-9">
 		<form autocomplete="off">
 			<h3>Car Details:</h3><br>
 			<div class="form-group row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Plate No.</label>
 				<div class="col-sm-10">
-				  <input type="text" class="form-control" id="plate_no" name="plate_no" placeholder="Plate Number">
+				  <input type="text" class="form-control" id="plate_no" name="plate_no" placeholder="Plate Number" style="width:300px !important;">
 				  <span id="plate_error" style="color:red;font-size:12px;"></span>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Current Color: </label>
 				<div class="col-sm-10">
-					<select class="form-control" id="curr" name="curr_color">
+					<select class="form-control" id="curr" name="curr_color" style="width:300px !important;">
 						<option selected disabled>-- Choose Color --</option>
 						<option value="red" data-src="{{ url('../resources/assets/car_red.png') }}">Red</option>
 						<option value="green" data-src="{{ url('../resources/assets/car_green.png') }}">Green</option>
@@ -65,7 +68,7 @@
 			<div class="form-group row">
 				<label for="inputPassword3" class="col-sm-2 col-form-label">Target Color: </label>
 				<div class="col-sm-10">
-					<select class="form-control" id="target" name="target_color">
+					<select class="form-control" id="target" name="target_color" style="width:300px !important;">
 						<option selected disabled>-- Choose Color --</option>
 						<option value="red" data-src="{{ url('../resources/assets/car_red.png') }}">Red</option>
 						<option value="green" data-src="{{ url('../resources/assets/car_green.png') }}">Green</option>
@@ -76,7 +79,7 @@
 			</div>	
 
 			<div class="form-group row">
-				<button class="btn btn-md btn-danger" id="process">Submit</button>
+				<button class="btn btn-md" style="background: #ea6a5b; color:white;" id="process">Submit</button>
 			</div>		
 		</form>			
 	</div>			
@@ -105,6 +108,7 @@
 
 		jQuery('#process').click(function(e) {
 			e.preventDefault();
+			let url = '{{ env('APP_API_URL') }}'
   			$('#plate_error').empty()
   			$('#curr_error').empty()
   			$('#target_error').empty()
@@ -125,12 +129,11 @@
           			target: jQuery('#target').val()
           		},
           		success: function(res) {
-          			window.location.href = "http://localhost/paint-job/public/api/cars";
+          			window.location.href = url + "cars";
           		},
           		error: function(errors) {
           			console.log(errors)
           			if (errors.responseJSON.errors['plate_no']) {
-          				console.log(errors.responseJSON.errors)
 	          			$('#plate_error').append('<p>' + errors.responseJSON.errors['plate_no'][0] + '</p>');
           			}
           			if (errors.responseJSON.errors['curr']) {
