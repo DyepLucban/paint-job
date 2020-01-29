@@ -6,7 +6,7 @@
 		<div class="col-md-8">
 			<h1>Paint Job in Progress</h1>
 			<table id="in_prog" class="table">
-				<thead class="thead-dark">
+				<thead class="thead-light">
 					<tr>
 						<th scope="col">Plate No.</th>
 						<th scope="col">Current Color</th>
@@ -22,7 +22,7 @@
 						<td>{{ $list->target_color }}</td>
 						<td>
 							<input type="hidden" id="id" value="{{ $list->id }}">
-							<button onClick="update({{ $list->id }});" class="btn btn-xs btn-primary" id="update"><span class="fa fa-pencil"></span></button>
+							<button class="btn btn-primary" onClick="update({{ $list->id }});" id="update">Mark as Complete</button>
 						</td>
 					</tr>
 					@endforeach
@@ -32,7 +32,7 @@
 
 		<div class="col-md-4">
 			<h1 style="color:white;">. . .</h1>
-			<table class="table">
+			<table class="table" id="total">
 			<thead class="thead-dark">
 				<tr>
 					<th scope="col" colspan="2">Shop Performance</th>
@@ -57,16 +57,17 @@
 				<tr>
 					<td style="padding-left:50px;">Green</td>
 					<td>{{ $totalGreen }}</td>
-				</tr>									
+				</tr>		
+			</tbody>							
 		</table>
 		</div>
 	</div>
 	<br></br>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-8">
 			<h1>Paint in Queue</h1>
-			<table class="table">
-				<thead class="thead-dark">
+			<table class="table" id="queue">
+				<thead class="thead-light">
 					<tr>
 						<th scope="col">Plate No.</th>
 						<th scope="col">Current Color</th>
@@ -84,6 +85,9 @@
 				</tbody>
 			</table>			
 		</div>
+		<div class="col-md-4">
+			
+		</div>
 	</div>
 
 	<br></br>
@@ -96,20 +100,28 @@
 @section('javascript')
 	<script type="text/javascript">
      	jQuery(document).ready(function(){
-     		test();
+     		// refresh();
 		});
 
-		function test() {
-	 		setInterval(function () {
-	      		jQuery.ajax({
-					url: "{{ url('/api/count') }}",
-	          		method: 'get',
-	          		success: function(res) {
-	          			console.log('refreshed!');   
-          				location.reload();
-	          		},
-	      		}); 
-	 		}, 5000);
+		// function refresh() {
+	 // 		setInterval(function () {
+	 //      		jQuery.ajax({
+		// 			url: "{{ url('/api/count') }}",
+	 //          		method: 'get',
+	 //          		success: function(res) {
+	 //          			console.log('refreshed!');   
+  //         				location.reload();
+	 //          		},
+	 //      		}); 
+	 // 		}, 5000);
+		// }
+
+		function updateQueued() {
+			jQuery.get("{{ url('/api/count') }}", function(res) {
+				if (res) {
+					$( "#queue" ).load(window.location.href + " #queue" );
+				}
+			})
 		}
 
  		function update(id) {
@@ -126,14 +138,15 @@
           			id: id,
           		},
           		success: function(res) {
-          			console.log(res);
-      				location.reload();
+					updateQueued();
+					$( "#total" ).load(window.location.href + " #total" );
+					$( "#queue" ).load(window.location.href + " #queue" );
+					$( "#in_prog" ).load(window.location.href + " #in_prog" );
           		},
           		error: function(errors) {
 					$('#alert').show().delay(2000).fadeOut('fast');
-					console.log(errors, 11);
           		}
-      		});     			
+      		});      			
  		}
 
 	</script>
