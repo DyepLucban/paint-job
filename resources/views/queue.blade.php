@@ -130,7 +130,7 @@
 @section('javascript')
 	<script type="text/javascript">
      	jQuery(document).ready(function(){
-     		refresh();
+     		//refresh();
 		});
 
 		function refresh() {
