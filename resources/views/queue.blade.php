@@ -103,14 +103,6 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($queued as $queues)
-					<tr>
-						<th>{{ $queues->plate_number }}</th>
-						<td>{{ $queues->curr_color }}</td>
-						<td>{{ $queues->target_color }}</td>
-					</tr>
-					@endforeach
-
 					@if($queued->count())
 						@foreach($queued as $queues)
 						<tr>
